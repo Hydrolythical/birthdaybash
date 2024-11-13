@@ -4,6 +4,22 @@ today=$(date +%d-%m)
 
 birthday_file="birthdays.txt"
 
+usage() {
+    echo "Usage: $0 [-p path_to_birthdays_file]"
+    exit 1
+}
+
+while getopts "p:" opt; do
+    case $opt in
+        p)
+            birthday_file="$OPTARG"
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+
 if [[ ! -f $birthday_file ]]; then
     echo "Birthday file not found!"
     exit 1
